@@ -1,0 +1,827 @@
+@media screen and (max-width: 1250px) {
+    /*SETUP*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+.container {
+    max-width: 1025px;
+    width: 100%;
+    margin: 0 auto;
+    /*border: 1px dotted red;*/
+}
+/*mostly for icons*/
+.btn {
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+}
+/*for actual btns*/
+.btn_ni {
+    padding: 0.7rem 2.3rem;
+    border-radius: 1.2rem;
+}
+/*modifier for sections headers*/
+.heading_section {
+    color: var(--primary-clr-green);
+    font-size: var(--heading-section);
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+/*modifier for outer section, adds common flex properties*/
+.outer_section_modifier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: var(--border-pink);
+}
+/*modifier for sections w/o background-image*/
+.even_section_modifier {
+    background-color: var(--primary-clr-blue);
+}
+/*modifier for sections w/ background image*/
+.back_img_modifier {
+    /*cuz we adding ::before/after*/
+    position: relative;
+    /*z0 cuz before/after will be -1 cuz its like behind it*/
+    z-index: 0;
+    background-image: url(./res/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*overlay-modifier for sections w/ b-img*/
+.back_img_modifier::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-clr-blue);
+    opacity: 0.9;
+    z-index: -1;
+}
+/*blur-modifier for sections w/ b-img*/
+.back_img_modifier::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    z-index: -1;
+}
+/*style for selected by mouse text*/
+::selection {
+    background-color: var(--primary-clr-pink);
+}
+/*1rem*/
+html {
+    font-size: 18px;
+}
+/*font-size for document*/
+body {
+    font-family: 'Karla', sans-serif;
+}
+/* VARIABLES */
+:root {
+    --base-rem: 1rem;
+    --heading-section: 3rem;
+    --primary-clr-white: snow;
+    --primary-clr-pink: #c54069;
+    --primary-clr-green: #5afdab;
+    --primary-clr-blue: #171a39;
+    --border-pink: 2px solid #c54069;
+    --transition-only: 0.2s ease-in;
+    --transition-transform: transform 0.2s ease-in-out;
+    --box-shadow: 0 2px 5px 0 var(--primary-clr-green);
+    --scale-oneone: scale(1.1);
+}
+/*END OF SETUP*/
+
+/*HEADER—————————————————————————————————————————————————————*/
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-clr-blue);
+    /*makes fixed header w/ p t l zi*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1111;
+    border-bottom: 1px solid var(--primary-clr-pink);
+    box-shadow: none;
+    /*animation properties*/
+    animation-name: borderAnime;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+
+}
+/*animation of bottom border*/
+@keyframes borderAnime {
+    from {
+        border-bottom: 1px solid var(--primary-clr-pink);
+        box-shadow: none;
+    }
+    to {
+        border-bottom: 2px solid var(--primary-clr-green);
+        box-shadow: var(--box-shadow);
+    }
+}
+.header-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*this div exist to make burger menu esier to make*/
+.header_left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-clr-pink);
+}
+.btn_burger {
+    display: none;
+}
+.fa-bars {
+    font-size: var(--base-rem);
+    color: var(--primary-clr-pink);
+}
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu li {
+    margin-right: var(--base-rem);
+    padding: var(--base-rem);
+    transition: var(--transition-transform);
+}
+.menu li:last-child {
+    margin-right: 0;
+}
+/*transform closer to user scaling (should be >1, but not too much)*/
+.menu li:hover {
+    transform: var(--scale-oneone);
+}
+.menu a {
+    font-weight: 400;
+    color: var(--primary-clr-pink);
+    text-transform: uppercase;
+}
+.cart {
+    position: relative;
+}
+.fa-shopping-cart {
+    font-size: var(--base-rem);
+    color: var(--primary-clr-pink);
+}
+/*counter which appears when u press buy btn*/
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--primary-clr-pink);
+    color: var(--primary-clr-white);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    font-size: 0.8rem;
+    visibility: hidden;
+    z-index: -100;
+}
+/*counter activating class*/
+.counter_open {
+    visibility: visible;
+    z-index: 1000;
+}
+
+/*CARTMODAL———————————————————————————————————————————————————*/
+.cart_modal_outer {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #171a39a6;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    z-index: -100;
+}
+.cart_modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cm_inner {
+    padding: var(--base-rem);
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-clr-blue);
+    border: var(--border-pink);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition-only);
+}
+.cm_inner:hover {
+    transform: var(--scale-oneone);
+}
+.cm_inner:focus {
+    transform: var(--scale-oneone);
+}
+.cm_inner h1 {
+    color: var(--primary-clr-green);
+    font-size: 2rem;
+    margin-bottom: var(--base-rem);
+}
+.cart_yn {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.btn_yes {
+    transition: var(--transition-only);
+}
+.btn_no {
+    transition: var(--transition-only);
+}
+.btn_yes:hover {
+    transform: var(--scale-oneone);
+}
+.btn_no:hover {
+    transform: var(--scale-oneone);
+}
+.fa-check, .fa-times {
+    font-size: var(--base-rem);
+    color: var(--primary-clr-pink);
+}
+.cart_modal_show {
+    visibility: visible;
+    z-index: 1000;
+}
+
+
+/*FIRST SECTION—————————————————————————————————————————————*/
+.first_inner {
+    z-index: 10;
+    /*change it when responsive*/
+    width: 45rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*change it when responsive*/
+    height: 100vh;
+}
+.first_inner h1, .first_inner p {
+    text-align: center;
+}
+.first_inner h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--primary-clr-green);
+    line-height: 90%;
+}
+.first_inner p {
+    font-size: var(--base-rem);
+    font-weight: 400;
+    margin: 2rem 0;
+    color: var(--primary-clr-white);
+}
+.btn_order {
+    position: relative;
+    color: var(--primary-clr-pink);
+    font-size: var(--base-rem);
+    background-color: transparent;
+    border: var(--border-pink);
+    text-transform: uppercase;
+    transition: var(--transition-transform);
+}
+.btn_order:hover {
+    transform: var(--scale-oneone);
+    background-color: var(--primary-clr-blue);
+    box-shadow: var(--box-shadow);
+}
+
+
+/*ORDER MODAL—————————————————————————————————————————————*/
+
+.order_modal {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #171a39a6;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    z-index: -1000;
+}
+.order_modal_inner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.order_wrapper {
+    position: relative;
+    padding: 2rem;
+    border: var(--border-pink);
+    width: 30rem;
+    background-color: var(--primary-clr-blue);
+}
+.btn_close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: var(--transition-only);
+}
+.btn_close:hover {
+    transform: var(--scale-oneone);
+}
+.order_modal_show {
+    visibility: visible;
+    z-index: 1000;
+}
+
+
+/*SECOND SECTION—————————————————————————————————————————————*/
+.second_inner {
+    margin: var(--base-rem) 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.catalog {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+/*change w/h when responsive*/
+.catalog_item {
+    border: 1px solid var(--primary-clr-green);
+    width: 8rem;
+    height: 30rem;
+    border-top-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    transition: var(--transition-only);
+}
+.catalog_item:hover {
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow);
+}
+/*align-self: normal; for normal text */
+.ci_mod {
+    width: calc(100% / 3 - var(--base-rem));
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    align-self: normal;
+    position: relative;
+}
+/*change height when responsive*/
+.pic {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    align-self: flex-start;
+    height: 12rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top-left-radius: 1.5rem;
+}
+.pic_one {
+    background-image: url(./res/book.png);
+}
+.pic_two {
+    background-image: url(./res/2.jpeg)
+}
+.pic_three {
+    background-image: url(./res/book3.jpg);
+}
+.pic_four {
+    background-image: url(./res/4.png);
+}
+.pic_five {
+    background-image: url(./res/book5.jfif);
+}
+.pic_six {
+    background-image: url(./res/book6.jpg);
+}
+.info {
+    padding: var(--base-rem);
+    color: var(--primary-clr-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: normal;
+    background: linear-gradient(var(--primary-clr-pink) 5%, transparent);
+}
+.info h6 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-clr-green);
+}
+/*flex grow to make text working as needed*/
+.info p {
+    flex-grow: 1;
+    margin-bottom: 0.5rem;
+}
+/*absolute for placing btn at the bottom*/
+.btn_buy {
+    position: absolute;
+    bottom: var(--base-rem);
+    left: var(--base-rem);
+    color: var(--primary-clr-pink);
+    background: transparent;
+    border: var(--border-pink);
+    text-transform: uppercase;
+    transition: var(--transition-only);
+}
+.btn_buy:hover {
+    color: var(--primary-clr-blue);
+    transform: var(--scale-oneone);
+    background: linear-gradient(var(--primary-clr-pink),var(--primary-clr-green),var(--primary-clr-blue));
+}
+
+
+/*THIRD SECTION—————————————————————————————————————————————*/
+
+.third_inner {
+    margin: var(--base-rem) 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.review {
+    /*change when responsive*/
+    width: 45rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*border: var(--border-pink);*/
+    padding: var(--base-rem);
+    transition: var(--transition-only);
+}
+.review h3, .review p {
+    text-align: center;
+}
+.review h3 {
+    position: relative;
+    text-transform: capitalize;
+    color: var(--primary-clr-green);
+    font-size: 2rem;
+    margin: var(--base-rem) 0;
+    z-index: 0;
+}
+.review h3::after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    color: var(--primary-clr-green);
+    background-color: var(--primary-clr-green);
+    transition: var(--transition-only);
+}
+.review h3:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    color: var(--primary-clr-green);
+    background-color: var(--primary-clr-green);
+}
+.review p {
+    font-size: var(--base-rem);
+    color: var(--primary-clr-white);
+    font-weight: 200;
+}
+.review p::before {
+    content: '"';
+}
+.review p::after {
+    content: '"';
+}
+/*THE WAY TO PUT IMG IN DIV properly*/
+/*basically usage of object-fit*/
+.profile_picture {
+    position: relative;
+    z-index: 0;
+    /*responsivness here*/
+    width: 15rem;
+    height: 15rem;
+    margin: 0 auto;
+    border-radius: 50%;
+    transition: var(--transition-only);
+}
+.profile_picture::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -1rem;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    background-color: var(--primary-clr-pink);
+    transition: var(--transition-only);
+}
+.profile_picture:hover::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: var(--base-rem);
+    right: -1rem;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    background-color: var(--primary-clr-green);
+}
+.profile_picture img {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.next_prev {
+    /*change when responsive*/
+    width: 15rem;
+    display: flex;
+    justify-content: space-between;
+}
+/*.prev, .next {
+}*/
+.fa-chevron-left, .fa-chevron-right {
+    font-size: var(--heading-section);
+    color: var(--primary-clr-pink);
+    align-self: center;
+    transition: var(--transition-only);
+}
+.fa-chevron-left:hover, .fa-chevron-right:hover {
+    transform: var(--scale-oneone);
+}
+
+/*FOURTH SECTION—————————————————————————————————————————————*/
+.fourth_inner {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fourth_main {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.f_text {
+    transition: var(--transition-only);
+}
+.f_text p {
+    color: var(--primary-clr-white);
+    font-size: var(--base-rem);
+    line-height: 150%;
+    transition: var(--transition-only);
+}
+.f_text:hover {
+    transform: var(--scale-oneone);
+}
+.f_text p::first-letter {
+    color: var(--primary-clr-pink);
+    text-transform: uppercase;
+    font-size: var(--heading-section);
+}
+.f_item {
+    width: calc(100% / 2 - 1rem);
+    align-self: normal;
+}
+/*.f_form {
+}*/
+.form {
+    padding: var(--base-rem);
+    background: linear-gradient(-25deg, var(--primary-clr-green), var(--primary-clr-blue), var(--primary-clr-green));
+    border-radius: var(--base-rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: var(--transition-only);
+    flex-grow: 1;
+}
+.form:hover {
+    transform: var(--scale-oneone);
+    box-shadow: var(--box-shadow);
+}
+.form input {
+    margin-bottom: var(--base-rem);
+    width: 100%;
+    border-radius: 0.5rem;
+    border: var(--border-pink);
+    height: 2rem;
+    padding-left: var(--base-rem);
+    transition: var(--transition-only);
+}
+.form input:focus {
+    transform: var(--scale-oneone);
+}
+.form input::placeholder {
+    color: var(--primary-clr-pink);
+    font-size: var(--base-rem);
+}
+.btn_zakaz {
+    color: var(--primary-clr-pink);
+    border: 2px solid var(--primary-clr-pink);
+    text-align: center;
+    text-transform: uppercase;
+    align-self: start;
+    transition: var(--transition-only);
+}
+.btn_zakaz:hover {
+    background-color: var(--primary-clr-blue);
+    transform: var(--scale-oneone);
+    box-shadow: var(--box-shadow);
+}
+
+/*FIFTH SECTION—————————————————————————————————————————————*/
+
+.fifth_inner {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.qa_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.qa_pair_modifier {
+    width: calc(100% / 2 - 1rem);
+    margin-bottom: 2rem;
+}
+.qa_pair {
+    background-color: var(--primary-clr-green);
+    border-radius: var(--base-rem);
+    border: var(--border-pink);
+    /*change when responsive*/
+    width: 27rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: var(--transition-only);
+}
+.qa_pair:hover {
+    box-shadow: var(--box-shadow);
+    transform: var(--scale-oneone);
+}
+.qa_pair:focus {
+    transform: var(--scale-oneone);
+}
+.qa_pair p {
+    font-size: var(--base-rem);
+    color: var(--primary-clr-blue);
+}
+.question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--base-rem);
+    cursor: pointer;
+}
+.minus {
+    display: none;
+}
+.fa-minus-square, .fa-plus-square {
+    font-size: var(--base-rem);
+    color: var(--primary-clr-pink);
+}
+.plus {
+    display: block;
+}
+.answer p{
+    position: relative;
+    z-index: 0;
+    padding: var(--base-rem);
+}
+.answer p::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 17%;
+    /*change when responsive*/
+    width: 17rem;
+    height: 1px;
+    color: var(--primary-clr-pink);
+    background-color: var(--primary-clr-pink);
+}
+/*dropdown activating class*/
+.answer {
+    display: none;
+}
+.show_dropdown .answer {
+    display: block;
+}
+.show_dropdown .plus {
+    display: none;
+}
+.show_dropdown .minus {
+    display: inline;
+}
+
+
+/*FOOTER SECTION—————————————————————————————————————————————*/
+
+.footer_inner {
+    margin: var(--base-rem) 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    padding: var(--base-rem);
+}
+.foot_menu {
+    margin: var(--base-rem);
+}
+.foot_menu li {
+    margin-bottom: var(--base-rem);
+    transition: var(--transition-only);
+}
+.foot_menu li:last-child {
+    margin-bottom: 0;
+}
+.foot_menu a {
+    font-size: var(--base-rem);
+    text-transform: uppercase;
+    color: var(--primary-clr-white);
+}
+.foot_menu li:hover {
+    transform: var(--scale-oneone);
+}
+.adress {
+    margin: var(--base-rem);
+}
+.adress h6 {
+    font-size: var(--base-rem);
+    text-transform: uppercase;
+    color: var(--primary-clr-white);
+    padding-bottom: 0.5rem;
+}
+.adress p {
+    font-size: var(--base-rem);
+    text-transform: capitalize;
+    color: var(--primary-clr-white);
+    padding: 0.5rem 0;
+}
+
+}
