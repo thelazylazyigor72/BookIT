@@ -159,6 +159,21 @@ body {
 .btn_burger {
     display: none;
 }
+.burger_border {
+    animation-name: identifier;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes identifier {
+    from {
+        box-shadow: 0;
+    }
+    to {
+        box-shadow: var(--box-shadow);
+    }
+}
 .fa-bars {
     font-size: var(--base-rem);
     color: var(--primary-clr-pink);

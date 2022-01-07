@@ -58,6 +58,7 @@ btns.forEach( x => {
             shop++
             counter.classList.add('counter_open')
             counter.textContent = shop
+            hamburger.classList.add('burger_border')
         }
     })
 })
@@ -70,6 +71,7 @@ yes.addEventListener('click', () => {
     cartModal.classList.toggle('cart_modal_show')
     shop = 0
     counter.classList.remove('counter_open')
+    hamburger.classList.remove('burger_border')
 })
 
 no.addEventListener('click', () => {
