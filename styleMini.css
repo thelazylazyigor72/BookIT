@@ -181,11 +181,11 @@ body {
     display: none;
 }
 .fa-bars {
-    font-size: 2rem;
+    font-size: 1rem;
     color: var(--primary-clr-pink);
 }
 .times i {
-    font-size: 2rem;
+    font-size: 1rem;
     color: var(--primary-clr-pink);
 }
 .menu {

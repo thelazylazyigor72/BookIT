@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) and (orientation: landscape) {
     /*SETUP*/
 * {
     margin: 0;
@@ -154,7 +154,7 @@ body {
     align-items: center;
 }
 .logo {
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: bold;
     color: var(--primary-clr-pink);
 }
@@ -183,11 +183,11 @@ body {
     display: none;
 }
 .fa-bars {
-    font-size: 2rem;
+    font-size: 1rem;
     color: var(--primary-clr-pink);
 }
 .times i {
-    font-size: 2rem;
+    font-size: 1rem;
     color: var(--primary-clr-pink);
 }
 .menu {
