@@ -773,11 +773,12 @@ body {
 }
 .qa_pair:hover {
     box-shadow: var(--box-shadow);
-    transform: var(--scale-oneone);
+    /*transform: var(--scale-oneone);*/
 }
+/*
 .qa_pair:focus {
     transform: var(--scale-oneone);
-}
+}*/
 .qa_pair p {
     font-size: var(--base-rem);
     color: var(--primary-clr-blue);
