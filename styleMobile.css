@@ -152,7 +152,7 @@ body {
     align-items: center;
 }
 .logo {
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: bold;
     color: var(--primary-clr-pink);
 }
@@ -181,11 +181,11 @@ body {
     display: none;
 }
 .fa-bars {
-    font-size: 1rem;
+    font-size: 2rem;
     color: var(--primary-clr-pink);
 }
 .times i {
-    font-size: 1rem;
+    font-size: 2rem;
     color: var(--primary-clr-pink);
 }
 .menu {
