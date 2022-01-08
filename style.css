@@ -735,6 +735,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     transition: var(--transition-only);
+    padding: 1.5rem 1.5rem 0 1.5rem;;
 }
 .qa_pair:hover {
     box-shadow: var(--box-shadow);
@@ -752,8 +753,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--base-rem);
     cursor: pointer;
+    padding-bottom: var(--base-rem);
+    margin-bottom: 0.5rem;
 }
 .minus {
     display: none;
@@ -766,21 +768,10 @@ body {
     display: block;
 }
 .answer p{
+    border-top: 1px solid #171a395d;
     position: relative;
     z-index: 0;
-    padding: var(--base-rem);
-}
-.answer p::before {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: 17%;
-    /*change when responsive*/
-    width: 17rem;
-    height: 1px;
-    color: var(--primary-clr-pink);
-    background-color: var(--primary-clr-pink);
+    padding: 1rem 0 1.5rem 0;
 }
 /*dropdown activating class*/
 .answer {
