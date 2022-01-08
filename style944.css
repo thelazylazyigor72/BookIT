@@ -313,6 +313,26 @@ body {
     /*change it when responsive*/
     height: 100vh;
 }
+@media screen and (max-width: 944px) and (orientation: landscape) {
+    .first_inner {
+        z-index: 10;
+        /*change it when responsive*/
+        width: 40rem;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /*change it when responsive*/
+        height: 130vh;
+    }
+    .first_inner h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--primary-clr-green);
+        line-height: 90%;
+    }
+}
 .first_inner h1, .first_inner p {
     text-align: center;
 }
