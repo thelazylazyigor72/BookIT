@@ -772,6 +772,10 @@ body {
 }
 .qa_pair:hover {
     box-shadow: var(--box-shadow);
+    transform: scale(1);
+}
+.qa_pair:focus {
+    transform: scale(1);
 }
 .qa_pair p {
     font-size: var(--base-rem);
