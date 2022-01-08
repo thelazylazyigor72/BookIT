@@ -762,7 +762,7 @@ body {
     border-radius: var(--base-rem);
     border: var(--border-pink);
     /*change when responsive*/
-    width: 30rem;
+    width: 24rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
