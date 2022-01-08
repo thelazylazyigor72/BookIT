@@ -313,31 +313,185 @@ body {
     /*change it when responsive*/
     height: 100vh;
 }
-@media screen and (max-width: 944px) and (orientation: landscape) {
+@media screen and (max-width: 1000px) and (orientation: landscape) {
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--primary-clr-blue);
+        /*makes fixed header w/ p t l zi*/
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1111;
+        border-bottom: 1px solid var(--primary-clr-pink);
+        box-shadow: none;
+        /*animation properties*/
+        animation-name: borderAnime;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    
+    }
+    /*animation of bottom border*/
+    @keyframes borderAnime {
+        from {
+            border-bottom: 1px solid var(--primary-clr-pink);
+            box-shadow: none;
+        }
+        to {
+            border-bottom: 2px solid var(--primary-clr-green);
+            box-shadow: var(--box-shadow);
+        }
+    }
+    .header-inner {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    /*this div exist to make burger menu esier to make*/
+    .header_left {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary-clr-pink);
+    }
+    .btn_burger {
+        display: block;
+    }
+    .burger_border {
+        animation-name: identifier;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+    @keyframes identifier {
+        from {
+            box-shadow: 0;
+        }
+        to {
+            box-shadow: var(--box-shadow);
+        }
+    }
+    .bars {
+        display: block;
+    }
+    .times {
+        display: none;
+    }
+    .fa-bars {
+        font-size: 2rem;
+        color: var(--primary-clr-pink);
+    }
+    .times i {
+        font-size: 2rem;
+        color: var(--primary-clr-pink);
+    }
+    .menu {
+        display: none;
+    }
+    /*SHOWING MENU*/
+    .show_menu .menu {
+        margin-top: 0.3rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .show_menu .bars {
+        display: none;
+    }
+    .show_menu .times {
+        display: block;
+    }
+    .list {
+        position: relative;
+        z-index: 0;
+        width: 100%;
+        padding: var(--base-rem);
+        transition: var(--transition-transform);
+    }
+    .list::after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 10rem;
+        height: 2px;
+        color: var(--primary-clr-green);
+        background-color: var(--primary-clr-green);
+        transition: var(--transition-only); 
+    }
+    /*transform closer to user scaling (should be >1, but not too much)*/
+    .menu li:hover {
+        transform: var(--scale-oneone);
+    }
+    .menu a {
+        font-weight: 400;
+        color: var(--primary-clr-pink);
+        text-transform: uppercase;
+    }
+    .cart {
+        position: relative;
+    }
+    .fa-shopping-cart {
+        font-size: var(--base-rem);
+        color: var(--primary-clr-pink);
+    }
+    /*counter which appears when u press buy btn*/
+    .counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 5px;
+        left: 35px;
+        background-color: var(--primary-clr-pink);
+        color: var(--primary-clr-white);
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        font-size: 0.8rem;
+        visibility: hidden;
+        z-index: -100;
+    }
+    /*counter activating class*/
+    .counter_open {
+        visibility: visible;
+        z-index: 100;
+    }
+    
     .first_inner {
         z-index: 10;
         /*change it when responsive*/
-        width: 40rem;
+        width: 30rem;
         margin: 0 auto;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         /*change it when responsive*/
-        height: 130vh;
-    }
-    .first_inner h1 {
-        font-size: 4rem;
-        font-weight: 700;
-        color: var(--primary-clr-green);
-        line-height: 90%;
+        height: 115vh;
     }
 }
 .first_inner h1, .first_inner p {
     text-align: center;
 }
 .first_inner h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
     color: var(--primary-clr-green);
     line-height: 90%;
