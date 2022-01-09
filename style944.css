@@ -184,6 +184,7 @@ body {
     align-items: center;
 }
 .menu li {
+    cursor: pointer;
     margin-right: var(--base-rem);
     padding: var(--base-rem);
     transition: var(--transition-transform);
@@ -202,6 +203,7 @@ body {
 }
 .cart {
     position: relative;
+    cursor: s;
 }
 .fa-shopping-cart {
     font-size: var(--base-rem);
