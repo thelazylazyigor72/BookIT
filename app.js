@@ -1,5 +1,6 @@
 /* NAVIGATION HAMBURGER _________________________________*/
 
+/*  */
 const hamburger = document.querySelector('.btn_burger')
 const header = document.querySelector('.header-inner')
 const lists = document.querySelectorAll('.list')

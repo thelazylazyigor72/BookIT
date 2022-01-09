@@ -143,6 +143,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* flex columns on mobiles*/
 }
 /*this div exist to make burger menu esier to make*/
 .header_left {
@@ -156,9 +157,13 @@ body {
     font-weight: bold;
     color: var(--primary-clr-pink);
 }
+/*burger should not be visible on desktop versions*/
 .btn_burger {
     display: none;
+    /*on mobile display block*/
 }
+/*class that activates on mobile versions glowing effect */
+/*around burger to indicate that u bought smth*/
 .burger_border {
     animation-name: identifier;
     animation-duration: 1s;
@@ -166,6 +171,7 @@ body {
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
 }
+/*indication animation*/
 @keyframes identifier {
     from {
         box-shadow: 0;
