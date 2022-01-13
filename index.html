@@ -29,11 +29,13 @@
     <div class="header">
         <div class="container">
             <div class="header-inner">
+                <!-- its 4 when we switchin on mobiles, burger will float exatly to the right corner-->
                 <div class="header_left">
                     <div class="logo">
                         BookIT
                     </div>
                     <button class="btn btn_burger">
+                        <!-- here we got spans w/ icons so non-active will be burger and when menu is opened we will see times, like u can close w/ tappin on here!-->
                         <span class="bars">
                             <i class="fas fa-bars"></i>
                         </span>
@@ -42,12 +44,15 @@
                         </span>
                     </button>
                 </div>
+                <!-- also no need to wrap ul menu we just add .menu class on ul and styling it-->
                 <ul class="menu">
+                    <!-- list class added for js for burger menu, so li.list will have option like when wwe clicking it - burger/menu will be closed-->
                     <li class="list"><a href="#">catalog</a></li>
                     <li class="list"><a href="#">review</a></li>
                     <li class="list"><a href="#">order</a></li>
                     <li class="list"><a href="#">contact</a></li>
                     <li class="cart list">
+                        <!-- here we got added an indicator div that will be changin his text content when we buying smth-->
                         <i class="fas fa-shopping-cart"></i>
                         <div class="counter">1</div>
                     </li>

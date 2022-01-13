@@ -117,6 +117,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 1111;
+    /*border: Npx typeofline color like that*/
     border-bottom: 1px solid var(--primary-clr-pink);
     box-shadow: none;
     /*animation properties*/
@@ -127,7 +128,7 @@ body {
     animation-timing-function: ease-in-out;
 
 }
-/*animation of bottom border*/
+/*def of animation of bottom border*/
 @keyframes borderAnime {
     from {
         border-bottom: 1px solid var(--primary-clr-pink);
@@ -143,9 +144,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* flex columns on mobiles*/
+    /* will be  flex columns on mobiles to make columned menu*/
 }
-/*this div exist to make burger menu esier to make*/
+/*this div exist to make burger menu appears on right corner*/
 .header_left {
     width: 100%;
     display: flex;
@@ -229,6 +230,7 @@ body {
     width: 15px;
     height: 15px;
     font-size: 0.8rem;
+    /* visibiity options that regulered by js*/
     visibility: hidden;
     z-index: -100;
 }

@@ -194,6 +194,7 @@ body {
     display: none;
 }
 /*SHOWING MENU*/
+/*when we need to change many elements inside one div which is parent of all of them we just adding activating class to the parent, запись такая .активатор *пробел то есть обозначаем что дальше дети идут* .меню(или чтото еще)*/
 .show_menu .menu {
     margin-top: 0.3rem;
     width: 100%;
